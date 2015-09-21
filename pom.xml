@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +15,16 @@
   <properties>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jsf.version>2.1</jsf.version>
+    <jsf-impl.version>2.2.6</jsf-impl.version>
+    <jetty.version>8.1.13.v20130916</jetty.version>
+    <!-- UEL Impl -->
+    <uel.version>2.2</uel.version>
 
+    <wildfly.plugin.version>1.0.1.Final</wildfly.plugin.version>
+
+    <slf4j-api.version>1.7.6</slf4j-api.version>
+    <logback.version>1.1.2</logback.version>
   </properties>
 
   <dependencyManagement>
@@ -25,16 +35,30 @@
         <version>${jsf.version}</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.glassfish</groupId>
-        <artifactId>javax.faces</artifactId>
-        <version>${jsf-impl.version}</version>
-      </dependency>
+      <!--<dependency>-->
+        <!--<groupId>org.glassfish</groupId>-->
+        <!--<artifactId>javax.faces</artifactId>-->
+        <!--<version>${jsf-impl.version}</version>-->
+      <!--</dependency>-->
 
       <dependency>
-        <groupId>org.glassfish.web</groupId>
-        <artifactId>el-impl</artifactId>
-        <version>${uel.version}</version>
+        <groupId>com.sun.faces</groupId>
+        <artifactId>jsf-impl</artifactId>
+        <version>2.1.20-05</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <!--<dependency>-->
+        <!--<groupId>org.glassfish.web</groupId>-->
+        <!--<artifactId>el-impl</artifactId>-->
+        <!--<version>${uel.version}</version>-->
+      <!--</dependency>-->
+
+      <dependency>
+        <groupId>org.jboss.spec.javax.faces</groupId>
+        <artifactId>jboss-jsf-api_2.1_spec</artifactId>
+        <scope>provided</scope>
+        <version>2.1.29.1.Final</version>
       </dependency>
 
       <dependency>
@@ -54,40 +78,61 @@
         <artifactId>jetty-webapp</artifactId>
         <version>${jetty.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j-api.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <build>
     <pluginManagement>
-    <plugins>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-ejb-plugin</artifactId>
-      <configuration>
-        <ejbVersion>3.2</ejbVersion>
-      </configuration>
-    </plugin>
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-ear-plugin</artifactId>
-      <version>2.9</version>
-    </plugin>
-    <!-- Work around issues encountered with http://jira.codehaus.org/browse/MWAR-187
-        during release -->
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-war-plugin</artifactId>
-      <configuration>
-        <useCache>false</useCache>
-      </configuration>
-    </plugin>
-    <!-- JBoss AS plugin to deploy war -->
-    <plugin>
-      <groupId>org.wildfly.plugins</groupId>
-      <artifactId>wildfly-maven-plugin</artifactId>
-      <version>${wildfly.plugin.version}</version>
-    </plugin>
-    </plugins>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+            <source>1.7</source>
+            <target>1.7</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-ejb-plugin</artifactId>
+          <configuration>
+            <ejbVersion>3.2</ejbVersion>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-ear-plugin</artifactId>
+          <version>2.9</version>
+        </plugin>
+        <!-- Work around issues encountered with http://jira.codehaus.org/browse/MWAR-187
+            during release -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <configuration>
+            <useCache>false</useCache>
+          </configuration>
+        </plugin>
+        <!-- JBoss AS plugin to deploy war -->
+        <plugin>
+          <groupId>org.wildfly.plugins</groupId>
+          <artifactId>wildfly-maven-plugin</artifactId>
+          <version>${wildfly.plugin.version}</version>
+        </plugin>
+      </plugins>
     </pluginManagement>
 
 
@@ -159,4 +204,7 @@
       </pluginRepositories>
     </profile>
   </profiles>
+  <modules>
+    <module>gallery-war</module>
+  </modules>
 </project>
