@@ -1,34 +1,28 @@
-package com.github.huangp.ejb;
+package java.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.transaction.Status;
-import javax.transaction.TransactionSynchronizationRegistry;
-import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
 
 import org.slf4j.Logger;
 import com.github.huangp.model.User;
+import com.github.huangp.service.UsersService;
 import com.google.common.base.Optional;
 
 import static org.slf4j.LoggerFactory.*;
 
-@Named("usersManager")
+@Named("usersService")
 @RequestScoped
 @Stateful
-public class EJBUsersManager implements UsersManager {
+public class EJBUsersServiceImpl implements UsersService {
     private static final Logger log =
-            getLogger(EJBUsersManager.class);
+            getLogger(EJBUsersServiceImpl.class);
 
     @Inject
     private EntityManager entityManager;

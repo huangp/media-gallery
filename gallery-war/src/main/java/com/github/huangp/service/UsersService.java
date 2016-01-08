@@ -1,4 +1,4 @@
-package com.github.huangp.ejb;
+package com.github.huangp.service;
 
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -8,7 +8,7 @@ import javax.inject.Named;
 import com.github.huangp.model.User;
 import com.google.common.base.Optional;
 
-public interface UsersManager {
+public interface UsersService {
 
     @SuppressWarnings("unchecked")
     @Produces

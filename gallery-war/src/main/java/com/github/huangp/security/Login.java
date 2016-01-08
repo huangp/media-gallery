@@ -1,7 +1,6 @@
 package com.github.huangp.security;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
@@ -10,7 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.github.huangp.ejb.UsersManager;
+import com.github.huangp.service.UsersService;
 import com.github.huangp.model.User;
 import com.google.common.base.Optional;
 
@@ -25,7 +24,7 @@ public class Login implements Serializable {
     private Credentials credentials;
 
     @EJB
-    private UsersManager usersManager;
+    private UsersService usersManager;
 
     private User currentUser;
 

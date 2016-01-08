@@ -33,19 +33,19 @@
       <table>
         <tr>
           <td>Username</td>
-          <td><h:inputText value="#{usersManager.newUser.username}"/></td>
+          <td><h:inputText value="#{usersService.newUser.username}"/></td>
         </tr>
         <tr>
           <td>Name</td>
-          <td><h:inputText value="#{usersManager.newUser.name}"/></td>
+          <td><h:inputText value="#{usersService.newUser.name}"/></td>
         </tr>
         <tr>
           <td>Password</td>
-          <td><h:inputText value="#{usersManager.newUser.password}"/></td>
+          <td><h:inputText value="#{usersService.newUser.password}"/></td>
         </tr>
         <tr>
           <td></td>
-          <td><h:commandButton action="#{usersManager.addUser}" value="Add User" /></td>
+          <td><h:commandButton action="#{usersService.addUser}" value="Add User" /></td>
         </tr>
       </table>
     </h:form>
