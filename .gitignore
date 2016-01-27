@@ -1,3 +1,7 @@
 target/
+build/
 .idea/
 data/
+.gradle/
+*.iml
+*.jar

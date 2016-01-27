@@ -3,8 +3,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
   version="2.1">
-  <persistence-unit name="loginDatabase">
-    <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+  <persistence-unit name="loginDatabase" transaction-type="RESOURCE_LOCAL">
+    <non-jta-data-source>jdbc/DataSource</non-jta-data-source>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="create-drop" />
       <property name="hibernate.show_sql" value="true" />

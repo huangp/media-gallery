@@ -1,0 +1,6 @@
+rootProject.name = 'Media Gallery'
+include 'gallery-war', 'jetty-server-jar', 'server-bootstrap'
+
+//project(':gallery-war').projectDir = "$rootDir/gallery-war" as File
+//project(':server-bootstrap').projectDir = "$rootDir/server-bootstrap" as File
+//project(':jetty-server-jar').projectDir = "$rootDir/jetty-server-jar" as File

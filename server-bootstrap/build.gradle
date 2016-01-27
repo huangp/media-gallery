@@ -1,0 +1,13 @@
+
+description = 'Bootstrap runner'
+group 'com.github.huangp.media.bootstrap'
+
+jar {
+    manifest {
+        attributes(
+            "Implementation-Title": "Gradle",
+            "Implementation-Version": version,
+            'Main-Class': 'com.github.huangp.media.bootstrap.JettyBootstrap'
+        )
+    }
+}

@@ -1,4 +1,4 @@
-package java.impl;
+package com.github.huangp.service;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
 import com.github.huangp.model.User;
-import com.github.huangp.service.UsersService;
 import com.google.common.base.Optional;
 
 import static org.slf4j.LoggerFactory.*;
