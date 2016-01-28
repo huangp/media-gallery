@@ -1,4 +1,4 @@
-package com.github.huangp;
+package com.github.huangp.media;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;

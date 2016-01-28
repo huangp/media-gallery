@@ -1,4 +1,4 @@
-package com.github.huangp.security;
+package com.github.huangp.media.security;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;

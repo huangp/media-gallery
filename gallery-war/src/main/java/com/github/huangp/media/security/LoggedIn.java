@@ -1,4 +1,4 @@
-package com.github.huangp.security;
+package com.github.huangp.media.security;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,12 +1,12 @@
-package com.github.huangp.service;
+package com.github.huangp.media.service;
 
 import java.util.List;
+import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
-import com.github.huangp.model.User;
-import com.google.common.base.Optional;
+import com.github.huangp.media.model.User;
 
 public interface UsersService {
 

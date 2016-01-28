@@ -1,6 +1,7 @@
-package com.github.huangp.service;
+package com.github.huangp.media.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
@@ -11,8 +12,8 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 import org.slf4j.Logger;
-import com.github.huangp.model.User;
-import com.google.common.base.Optional;
+
+import com.github.huangp.media.model.User;
 
 import static org.slf4j.LoggerFactory.*;
 
@@ -64,7 +65,7 @@ public class EJBUsersServiceImpl implements UsersService {
                 .setParameter("password", password)
                 .getResultList();
         if (resultList.isEmpty()) {
-            return Optional.absent();
+            return Optional.empty();
         }
         return Optional.of(resultList.get(0));
     }

@@ -1,4 +1,4 @@
-package com.github.huangp.model;
+package com.github.huangp.media.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
