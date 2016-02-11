@@ -26,7 +26,7 @@ public class MediaResource {
     @GET
     public Response getAll() {
         List<String> result = mediaSearchService.getAllMedia();
-        GenericEntity<List<String>> entity = new GenericEntity<List<String>>(result) {};
-        return Response.ok(entity).build();
+//        GenericEntity<List<String>> entity = new GenericEntity<List<String>>(result) {};
+        return Response.ok(result.toString()).build();
     }
 }

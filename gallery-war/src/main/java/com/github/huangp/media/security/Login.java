@@ -2,11 +2,11 @@ package com.github.huangp.media.security;
 
 import java.io.Serializable;
 import java.util.Optional;
-import javax.ejb.EJB;
+//import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+//import javax.faces.application.FacesMessage;
+//import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,7 +23,7 @@ public class Login implements Serializable {
     @Inject
     private Credentials credentials;
 
-    @EJB
+//    @EJB
     private UsersService usersManager;
 
     private User currentUser;
@@ -33,14 +33,14 @@ public class Login implements Serializable {
                 credentials.getPassword());
         if (user.isPresent()) {
             currentUser = user.get();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Welcome, " + currentUser.getName()));
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Welcome, " + currentUser.getName()));
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("invalid username and password"));
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("invalid username and password"));
         }
     }
 
     public void logout() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Goodbye, " + currentUser.getName()));
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Goodbye, " + currentUser.getName()));
         currentUser = null;
     }
 

@@ -14,6 +14,8 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.google.common.collect.Lists;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
@@ -25,6 +27,8 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
  */
 @RequestScoped
 public class EJBMediaSearchServiceImpl implements MediaSearchService {
+    private static final Logger log =
+            LoggerFactory.getLogger(EJBMediaSearchServiceImpl.class);
 
     @Inject
     private Client client;
@@ -52,6 +56,7 @@ public class EJBMediaSearchServiceImpl implements MediaSearchService {
         while (true) {
 
             for (SearchHit hit : scrollResp.getHits().getHits()) {
+                log.debug("found 1 hit. ID {}", hit.id());
                 //Handle the hit...
                 String id = hit.getId();
                 String sourceAsString = hit.getSourceAsString();

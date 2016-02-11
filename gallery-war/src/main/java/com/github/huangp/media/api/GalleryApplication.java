@@ -1,18 +1,15 @@
 package com.github.huangp.media.api;
 
+import java.util.Set;
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-import org.glassfish.jersey.server.ResourceConfig;
 
 
 /**
  * @author Patrick Huang <a href="mailto:pahuang@redhat.com">pahuang@redhat.com</a>
  */
-@ApplicationPath("api")
-public class GalleryApplication extends ResourceConfig {
+@ApplicationPath("/api")
+public class GalleryApplication extends Application{
 
-    public GalleryApplication() {
-        packages(this.getClass().getPackage().getName(),
-                "com.fasterxml.jackson.jaxrs.json");
-    }
 }

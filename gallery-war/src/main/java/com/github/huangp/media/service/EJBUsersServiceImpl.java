@@ -3,8 +3,8 @@ package com.github.huangp.media.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
+//import javax.ejb.Remove;
+//import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -19,7 +19,7 @@ import static org.slf4j.LoggerFactory.*;
 
 @Named("usersService")
 @RequestScoped
-@Stateful
+//@Stateful
 public class EJBUsersServiceImpl implements UsersService {
     private static final Logger log =
             getLogger(EJBUsersServiceImpl.class);
@@ -70,7 +70,7 @@ public class EJBUsersServiceImpl implements UsersService {
         return Optional.of(resultList.get(0));
     }
 
-    @Remove
+//    @Remove
     public void remove() {
     }
 
