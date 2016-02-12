@@ -1,0 +1,49 @@
+{
+  "file": "/tmp/media-organizer/2015-03/photo/1427647925000_2015-03-30_02-52-05.jpg",
+  "meta": {
+    "fileOrigin": "/tmp/test_media/zheng_phone/IMG_20150329_165208.jpg",
+    "sha1sum": "9e2a5c3f76d6f0ef3d2e65a1bc9db686316c4ccd",
+    "handledCount": 2,
+    "fileNameDate": "2015-03-29T06:52:08.000Z",
+    "exif": {
+      "Model": "Nexus 4",
+      "ImageWidth": 2048,
+      "YCbCrPositioning": 1,
+      "ResolutionUnit": 2,
+      "ImageHeight": 1536,
+      "YResolution": 72,
+      "Orientation": 1,
+      "XResolution": 72,
+      "Make": "LGE",
+      "GPSLongitude": 153.02765555555555,
+      "GPSLatitudeRef": "S",
+      "GPSDateStamp": "2015:03:29",
+      "GPSTimeStamp": [
+        6,
+        52,
+        1
+      ],
+      "GPSLongitudeRef": "E",
+      "GPSLatitude": -27.485783333333334,
+      "ColorSpace": 1,
+      "CreateDate": 1427647925,
+      "FNumber": 2.65,
+      "FocalLength": 4.6,
+      "ApertureValue": 2.65,
+      "WhiteBalance": 1,
+      "ExifImageWidth": 2048,
+      "SubSecTime": "802808",
+      "DateTimeOriginal": 1427647925,
+      "SubSecTimeDigitized": "802808",
+      "ExifImageHeight": 1536,
+      "Flash": 45312,
+      "FocalLengthIn35mmFormat": 34,
+      "ISO": 1600,
+      "SubSecTimeOriginal": "802808",
+      "ExposureTime": 0.0625,
+      "InteropIndex": "R98"
+    },
+    "createdDate": "2015-03-29T16:52:05.000Z",
+    "id": "3e865b6a9ec0fb5366778a6a75e77d2ae12e7a63"
+  }
+}

@@ -2,16 +2,23 @@ package com.github.huangp.media.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author Patrick Huang <a href="mailto:pahuang@redhat.com">pahuang@redhat.com</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MetaInfo {
     private String id;
     private String fileOrigin;
     private String sha1sum;
     private Date createdDate;
     private long size;
-    private String exif; // TODO pahuang turn this into an object?
+    private EXIF exif;
+
+    public EXIF getExif() {
+        return exif;
+    }
 
     public String getId() {
         return id;
@@ -53,11 +60,8 @@ public class MetaInfo {
         this.size = size;
     }
 
-    public String getExif() {
-        return exif;
-    }
 
-    public void setExif(String exif) {
+    public void setExif(EXIF exif) {
         this.exif = exif;
     }
 }

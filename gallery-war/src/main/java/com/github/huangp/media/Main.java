@@ -6,18 +6,19 @@ import java.io.File;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
-import org.wildfly.swarm.container.*;
+import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.datasources.DatasourcesFraction;
-import org.wildfly.swarm.jaxrs.JAXRSArchive;
 import org.wildfly.swarm.jpa.JPAFraction;
 import org.wildfly.swarm.undertow.WARArchive;
 import com.github.huangp.media.api.GalleryApplication;
 import com.github.huangp.media.api.MediaResource;
+import com.github.huangp.media.model.EXIF;
 import com.github.huangp.media.model.Media;
 import com.github.huangp.media.model.MetaInfo;
-import com.github.huangp.media.model.User;
 import com.github.huangp.media.service.EJBMediaSearchServiceImpl;
 import com.github.huangp.media.service.MediaSearchService;
+
+//import org.wildfly.swarm.jaxrs.JAXRSArchive;
 
 /**
  * @author Patrick Huang <a href="mailto:pahuang@redhat.com">pahuang@redhat.com</a>
@@ -61,7 +62,7 @@ public class Main {
 //        deployment.addAllDependencies();
 
 
-        JAXRSArchive deployment = ShrinkWrap.create( JAXRSArchive.class );
+        WARArchive deployment = ShrinkWrap.create( WARArchive.class );
 
         // api
         deployment.addClass(GalleryApplication.class);
@@ -77,6 +78,7 @@ public class Main {
         // model
         deployment.addClass(Media.class);
         deployment.addClass(MetaInfo.class);
+        deployment.addClass(EXIF.class);
 
         deployment.addAsWebInfResource(
                 new ClassLoaderAsset("META-INF/persistence.xml",

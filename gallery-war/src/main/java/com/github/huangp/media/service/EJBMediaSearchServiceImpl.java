@@ -49,9 +49,9 @@ public class EJBMediaSearchServiceImpl implements MediaSearchService {
             try {
                 Media media = objectMapper.readValue(src, Media.class);
                 result.add(media);
-            } catch (IOException e) {
-                log.debug("error unmarshall json source", e);
-                log.warn("can not handle (skipped): {}", src);
+            } catch (Exception e) {
+                log.info("error unmarshall json source", e);
+//                log.warn("can not handle (skipped): {}", src);
             }
             return null;
         });
@@ -92,9 +92,13 @@ public class EJBMediaSearchServiceImpl implements MediaSearchService {
 
     @Override
     public String getAllMediaAsJSON() {
-        StringBuilder stringBuilder = new StringBuilder();
-        searchAll(stringBuilder::append);
-        return stringBuilder.toString();
+        StringBuilder stringBuilder = new StringBuilder("[");
+        searchAll((str) -> stringBuilder.append(str).append(","));
+        // replace last comma
+        if (stringBuilder.charAt(stringBuilder.length() - 1) == ',') {
+            stringBuilder.setCharAt(stringBuilder.length() - 1, ' ');
+        }
+        return stringBuilder.append("]").toString();
     }
 
 

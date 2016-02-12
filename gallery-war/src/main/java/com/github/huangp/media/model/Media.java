@@ -3,11 +3,13 @@ package com.github.huangp.media.model;
 import java.io.File;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.base.MoreObjects;
 
 /**
  * @author Patrick Huang <a href="mailto:pahuang@redhat.com">pahuang@redhat.com</a>
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Media {
     private String file;
     private String description;
