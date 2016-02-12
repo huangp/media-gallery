@@ -14,6 +14,7 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Patrick Huang <a

@@ -6,9 +6,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 
+import com.github.huangp.media.model.Media;
 import com.github.huangp.media.service.EJBMediaSearchServiceImpl;
 import com.github.huangp.media.service.MediaSearchService;
 
@@ -25,8 +25,7 @@ public class MediaResource {
 
     @GET
     public Response getAll() {
-        List<String> result = mediaSearchService.getAllMedia();
-//        GenericEntity<List<String>> entity = new GenericEntity<List<String>>(result) {};
+        List<Media> result = mediaSearchService.getAllMedia();
         return Response.ok(result.toString()).build();
     }
 }

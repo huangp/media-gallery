@@ -1,38 +1,32 @@
 package com.github.huangp.media.model;
 
+import java.io.File;
 import java.util.Date;
+
+import com.google.common.base.MoreObjects;
 
 /**
  * @author Patrick Huang <a href="mailto:pahuang@redhat.com">pahuang@redhat.com</a>
  */
 public class Media {
-    private String location;
-    private String name;
-    private Date createdDate;
+    private String file;
     private String description;
+    private MetaInfo meta;
 
-    public String getLocation() {
-        return location;
+    public String getFile() {
+        return file;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return new File(file).getName();
     }
 
     public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+        return meta.getCreatedDate();
     }
 
     public String getDescription() {
@@ -41,5 +35,22 @@ public class Media {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public MetaInfo getMeta() {
+        return meta;
+    }
+
+    public void setMeta(MetaInfo meta) {
+        this.meta = meta;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("file", file)
+                .add("description", description)
+//                .add("meta", meta)
+                .toString();
     }
 }

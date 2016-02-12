@@ -1,8 +1,11 @@
 package com.github.huangp.media;
 
 
+import java.io.File;
+
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
+import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.wildfly.swarm.container.*;
 import org.wildfly.swarm.datasources.DatasourcesFraction;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
@@ -10,6 +13,8 @@ import org.wildfly.swarm.jpa.JPAFraction;
 import org.wildfly.swarm.undertow.WARArchive;
 import com.github.huangp.media.api.GalleryApplication;
 import com.github.huangp.media.api.MediaResource;
+import com.github.huangp.media.model.Media;
+import com.github.huangp.media.model.MetaInfo;
 import com.github.huangp.media.model.User;
 import com.github.huangp.media.service.EJBMediaSearchServiceImpl;
 import com.github.huangp.media.service.MediaSearchService;
@@ -58,11 +63,20 @@ public class Main {
 
         JAXRSArchive deployment = ShrinkWrap.create( JAXRSArchive.class );
 
+        // api
         deployment.addClass(GalleryApplication.class);
         deployment.addClass(MediaResource.class);
+
+        // services
         deployment.addClass(EJBMediaSearchServiceImpl.class);
         deployment.addClass(MediaSearchService.class);
+
+        // utilities
         deployment.addClass(ResourcesProducer.class);
+
+        // model
+        deployment.addClass(Media.class);
+        deployment.addClass(MetaInfo.class);
 
         deployment.addAsWebInfResource(
                 new ClassLoaderAsset("META-INF/persistence.xml",
@@ -74,10 +88,12 @@ public class Main {
 
 //        deployment.addAsWebInfResource(
 //                new ClassLoaderAsset("WEB-INF/web.xml", Main.class.getClassLoader()), "web.xml");
-//        deployment.addAsWebInfResource(
-//                new ClassLoaderAsset("WEB-INF/beans.xml", Main.class.getClassLoader()), "classes/beans.xml");
+        deployment.addAsWebInfResource(
+                new ClassLoaderAsset("WEB-INF/beans.xml", Main.class.getClassLoader()), "beans.xml");
 
         deployment.addAllDependencies();
+
+        deployment.as(ZipExporter.class).exportTo(new File("/tmp/gallery.war"), true);
 
         container.deploy(deployment);
 
