@@ -126,18 +126,12 @@
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>weld</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.wildfly.swarm</groupId>
-          <artifactId>jaxrs-modules</artifactId>
-        </exclusion>
-      </exclusions>
       <version>${version.wildfly-swarm}</version>
     </dependency>
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>undertow</artifactId>
-      <version>1.0.0.Alpha8</version>
+      <version>${version.wildfly-swarm}</version>
     </dependency>
     <!--<dependency>-->
       <!--<groupId>org.wildfly.swarm</groupId>-->

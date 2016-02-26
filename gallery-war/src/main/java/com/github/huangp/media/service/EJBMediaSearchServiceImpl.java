@@ -1,89 +1,94 @@
 package com.github.huangp.media.service;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.query.NestedQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.aggregations.AggregationBuilder;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.huangp.media.model.Media;
+import com.github.huangp.media.model.MediaFileType;
+import com.github.huangp.media.util.JSONObjectMapper;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
 /**
  * @author Patrick Huang
  *         <a href="mailto:pahuang@redhat.com">pahuang@redhat.com</a>
  */
-@RequestScoped
+@ApplicationScoped
 public class EJBMediaSearchServiceImpl implements MediaSearchService {
     private static final Logger log =
             LoggerFactory.getLogger(EJBMediaSearchServiceImpl.class);
 
     @Inject
     private Client client;
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    @Inject
+    private JSONObjectMapper objectMapper;
+
+    public static final String INDEX_NAME = "media";
+
+    // 100 hits per shard will be returned for each scroll
+    public static final int SIZE = 100;
+    public static final TimeValue KEEP_ALIVE =
+            new TimeValue(1, TimeUnit.MINUTES);
 
 
-    // TODO need to change wildfly configuration to allow access to folder on local file system http://stackoverflow.com/questions/31545261/wildfly-image-and-http-access-to-show-image-with-websocket
     @Override
     public List<Media> getAllMedia() {
+        QueryBuilder qb = matchAllQuery();
         List<Media> result = Lists.newArrayList();
-        searchAll(src -> {
+        query(qb, src -> {
             try {
-                Media media = objectMapper.readValue(src, Media.class);
+                Media media = objectMapper.fromJSON(src, Media.class);
                 result.add(media);
             } catch (Exception e) {
-                log.info("error unmarshall json source", e);
-//                log.warn("can not handle (skipped): {}", src);
+                log.warn("error unmarshall json source \n{}\n", src, e);
             }
             return null;
         });
         return result;
     }
 
-    private <T> void searchAll(Function<String, T> sourceToThing) {
-        TimeValue keepAlive = new TimeValue(10, TimeUnit.MINUTES);
+    private <T> void query(QueryBuilder queryBuilder,
+            Function<String, T> sourceToThing) {
 
-        QueryBuilder qb = matchAllQuery();
 //        FilterBuilders.termFilter("createdDate")
 
-        String indexName = "media";
-        SearchResponse scrollResp = client.prepareSearch(indexName)
-                .setSearchType(SearchType.SCAN)
-                .setScroll(keepAlive)
-                .setQuery(qb)
-                .setSize(100).execute().actionGet(); //100 hits per shard will be returned for each scroll
-//Scroll until no hits are returned
+        SearchResponse scrollResp = client.prepareSearch(INDEX_NAME)
+//                .setSearchType(SearchType.SCAN)
+                .setScroll(KEEP_ALIVE)
+                .setQuery(queryBuilder)
+                .addSort("_doc", SortOrder.DESC)
+                .setSize(SIZE)
+                .execute().actionGet();
 
-
+        // Scroll until no hits are returned
         while (true) {
             for (SearchHit hit : scrollResp.getHits().getHits()) {
                 log.debug("found 1 hit. ID {}", hit.id());
-                //Handle the hit...
+                // Handle the hit...
                 String id = hit.getId();
                 String sourceAsString = hit.getSourceAsString();
                 log.debug("source:{}", sourceAsString);
                 sourceToThing.apply(sourceAsString);
             }
-            scrollResp = client.prepareSearchScroll(scrollResp.getScrollId()).setScroll(keepAlive).execute().actionGet();
-            //Break condition: No hits are returned
+            scrollResp = client.prepareSearchScroll(scrollResp.getScrollId())
+                    .setScroll(KEEP_ALIVE).execute().actionGet();
+            // Break condition: No hits are returned
             if (scrollResp.getHits().getHits().length == 0) {
                 break;
             }
@@ -92,8 +97,9 @@ public class EJBMediaSearchServiceImpl implements MediaSearchService {
 
     @Override
     public String getAllMediaAsJSON() {
+        QueryBuilder qb = matchAllQuery();
         StringBuilder stringBuilder = new StringBuilder("[");
-        searchAll((str) -> stringBuilder.append(str).append(","));
+        query(qb, (str) -> stringBuilder.append(str).append(","));
         // replace last comma
         if (stringBuilder.charAt(stringBuilder.length() - 1) == ',') {
             stringBuilder.setCharAt(stringBuilder.length() - 1, ' ');
@@ -103,10 +109,27 @@ public class EJBMediaSearchServiceImpl implements MediaSearchService {
 
 
     @Override
-    public void getOne(String id) {
-        GetResponse response = client.prepareGet("index(media)", "type", id)
+    public String getOneAsJSON(String id) {
+        GetResponse response = client.prepareGet(INDEX_NAME, null, id)
                 .execute()
                 .actionGet();
-        Map<String, Object> source = response.getSource();
+        return response.getSourceAsString();
+    }
+
+    @Override
+    public Media getOne(String id) {
+        return objectMapper.fromJSON(getOneAsJSON(id), Media.class);
+    }
+
+    @Override
+    public String search(String fromDate, String toDate, MediaFileType mediaType) {
+        RangeQueryBuilder rangeQueryBuilder =
+                QueryBuilders.rangeQuery("meta.createdDate").from(fromDate)
+                        .to(toDate);
+        NestedQueryBuilder qb =
+                QueryBuilders.nestedQuery("meta", rangeQueryBuilder);
+        List<String> result = Lists.newLinkedList();
+        query(qb, result::add);
+        return result.toString();
     }
 }

@@ -1,0 +1,220 @@
+[
+  {
+    "file": "/tmp/media-organizer/2014-01/video/1390622079000_2014-01-25_13-54-39.mp4",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/zheng_phone/1390622083660.mp4",
+      "sha1sum": "f4b696a402efd18188b6ecf63bf8d331d6320526",
+      "handledCount": 3,
+      "fileNameDate": "2014-01-25T03:54:43.660Z",
+      "lsFullTime": "2015-12-22T00:17:22.964Z",
+      "size": "1080412",
+      "encodedDate": "2014-01-25T03:54:39.000Z",
+      "createdDate": "2014-01-25T03:54:39.000Z",
+      "id": "4c6f79e2526c1ac2d4b4577a2d2e476db3637a28"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2013-08/photo/1377031551000_2013-08-21_06-45-51.JPG",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/pentaxk01/photos/3-6m/IMGP1252.JPG",
+      "sha1sum": "b38c64007b141ab96e0fca5bd11da3c2e2ae46ff",
+      "handledCount": 2,
+      "exif": {
+        "Make": "PENTAX             ",
+        "Model": "PENTAX K-01        ",
+        "Orientation": 1,
+        "XResolution": 300,
+        "YResolution": 300,
+        "ResolutionUnit": 2,
+        "Software": "K-01 Ver 1.01          ",
+        "ModifyDate": "2013:08:20 20:45:51",
+        "Artist": "Patrick Huang",
+        "YCbCrPositioning": 2,
+        "Copyright": "",
+        "GPSVersionID": [
+          2,
+          3,
+          0,
+          0
+        ],
+        "ExposureTime": 0.5,
+        "FNumber": 2.8,
+        "ExposureProgram": 1,
+        "ISO": 1600,
+        "DateTimeOriginal": 1377031551,
+        "CreateDate": 1377031551,
+        "ExposureCompensation": 0,
+        "MeteringMode": 3,
+        "Flash": 16,
+        "FocalLength": 31,
+        "ColorSpace": 1,
+        "ExifImageWidth": 4928,
+        "ExifImageHeight": 3264,
+        "SensingMethod": 2,
+        "CustomRendered": 0,
+        "ExposureMode": 1,
+        "WhiteBalance": 0,
+        "FocalLengthIn35mmFormat": 46,
+        "SceneCaptureType": 0,
+        "Contrast": 0,
+        "Saturation": 0,
+        "Sharpness": 0,
+        "SubjectDistanceRange": 2,
+        "InteropIndex": "R98"
+      },
+      "createdDate": "2013-08-20T20:45:51.000Z",
+      "id": "1f9900266cc5a51f34430537f77e4568c330c313"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2015-12/video/1450743445887_2015-12-22_10-17-25.MOV",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/pentaxQ/IMGP0545.MOV",
+      "sha1sum": "a3b95cbc8a0f1795f14313b7a9cd86bfc7f847e0",
+      "handledCount": 3,
+      "lsFullTime": "2015-12-22T00:17:25.887Z",
+      "size": "48523700",
+      "createdDate": "2015-12-22T00:17:25.887Z",
+      "id": "5f89a1fd6b9397fa09ed9c4cd0c9e105ba7715a8"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2013-08/video/1376300146000_2013-08-12_19-35-46.MOV",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/pentaxk01/videos/IMGP1188.MOV",
+      "sha1sum": "90c271f5b973eb0a3fcd84f575e67135ce2d7f95",
+      "handledCount": 3,
+      "lsFullTime": "2015-12-22T00:17:23.751Z",
+      "size": "5718140",
+      "encodedDate": "2013-08-12T09:35:46.000Z",
+      "createdDate": "2013-08-12T09:35:46.000Z",
+      "id": "30ff7890e415e6955bcccc9a490d2410f39b9e80"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2015-03/photo/1427647925000_2015-03-30_02-52-05.jpg",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/zheng_phone/IMG_20150329_165208.jpg",
+      "sha1sum": "9e2a5c3f76d6f0ef3d2e65a1bc9db686316c4ccd",
+      "handledCount": 2,
+      "fileNameDate": "2015-03-29T06:52:08.000Z",
+      "exif": {
+        "Model": "Nexus 4",
+        "ImageWidth": 2048,
+        "YCbCrPositioning": 1,
+        "ResolutionUnit": 2,
+        "ImageHeight": 1536,
+        "YResolution": 72,
+        "Orientation": 1,
+        "XResolution": 72,
+        "Make": "LGE",
+        "GPSLongitude": 153.02765555555555,
+        "GPSLatitudeRef": "S",
+        "GPSDateStamp": "2015:03:29",
+        "GPSTimeStamp": [
+          6,
+          52,
+          1
+        ],
+        "GPSLongitudeRef": "E",
+        "GPSLatitude": -27.485783333333334,
+        "ColorSpace": 1,
+        "CreateDate": 1427647925,
+        "FNumber": 2.65,
+        "FocalLength": 4.6,
+        "ApertureValue": 2.65,
+        "WhiteBalance": 1,
+        "ExifImageWidth": 2048,
+        "SubSecTime": "802808",
+        "DateTimeOriginal": 1427647925,
+        "SubSecTimeDigitized": "802808",
+        "ExifImageHeight": 1536,
+        "Flash": 45312,
+        "FocalLengthIn35mmFormat": 34,
+        "ISO": 1600,
+        "SubSecTimeOriginal": "802808",
+        "ExposureTime": 0.0625,
+        "InteropIndex": "R98"
+      },
+      "createdDate": "2015-03-29T16:52:05.000Z",
+      "id": "3e865b6a9ec0fb5366778a6a75e77d2ae12e7a63"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2015-12/photo/1450743444953_2015-12-22_10-17-24.DNG",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/pentaxk01/photos/3-6m/IMGP1253.DNG",
+      "sha1sum": "99a78f180c122edc3b74e28e496356e750639955",
+      "handledCount": 3,
+      "lsFullTime": "2015-12-22T00:17:24.953Z",
+      "size": "17152382",
+      "createdDate": "2015-12-22T00:17:24.953Z",
+      "id": "f5b4c943beefdae9bdaba244f603469e42389cb8"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2013-07/photo/1374275738193_2013-07-20_09-15-38.jpg",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/zheng_phone/mmexport1374275738193.jpg",
+      "sha1sum": "5ec2119a713670bab2cdcd520bab013e2295d363",
+      "handledCount": 2,
+      "fileNameDate": "2013-07-19T23:15:38.193Z",
+      "exif": {},
+      "createdDate": "2013-07-19T23:15:38.193Z",
+      "id": "91a833fb81cb31b2a17c70d15c4ab579aeeb1e9b"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2013-06/video/1371736800000_2013-06-21_00-00-00.mkv",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/processed/20130621.洗澡.mkv",
+      "sha1sum": "62d5b0abfe61bcbffdb298ada9af09eefc1bc692",
+      "handledCount": 3,
+      "fileNameDate": "2013-06-20T14:00:00.000Z",
+      "lsFullTime": "2015-12-22T00:17:25.187Z",
+      "size": "22119974",
+      "createdDate": "2013-06-20T14:00:00.000Z",
+      "id": "af384c7a1116664b03c176337129497097f106ff"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2013-10/photo/1382485383000_2013-10-23_09-43-03.jpg",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/zheng_phone/PANO_20131023_094303.jpg",
+      "sha1sum": "85ae1ebf917bb2f2ce0cc484b8f82713db8aafa8",
+      "handledCount": 2,
+      "fileNameDate": "2013-10-22T23:43:03.000Z",
+      "exif": {
+        "Orientation": 1,
+        "ModifyDate": "2013:10:23 09:43:03",
+        "LightSource": 0,
+        "MeteringMode": 65535,
+        "ImageHeight": 448,
+        "ImageWidth": 664,
+        "GPSTimeStamp": [
+          1,
+          43,
+          3
+        ],
+        "GPSDateStamp": "2013:10:23"
+      },
+      "modifiedDate": "2013-10-22T23:43:03.000Z",
+      "createdDate": "2013-10-22T23:43:03.000Z",
+      "id": "3e329a8472d3b3779bfe6cd8bad7b574c2dddcf0"
+    }
+  },
+  {
+    "file": "/tmp/media-organizer/2015-05/video/1431656841000_2015-05-15_12-27-21.mp4",
+    "meta": {
+      "fileOrigin": "/tmp/test_media/zheng_phone/VID_20150515_122721.mp4",
+      "sha1sum": "f63de5dfe9b43d9bf3d38d533388b1afd141c53f",
+      "handledCount": 3,
+      "fileNameDate": "2015-05-15T02:27:21.000Z",
+      "lsFullTime": "2015-12-22T00:17:25.132Z",
+      "size": "20710920",
+      "encodedDate": "2015-05-15T02:27:35.000Z",
+      "createdDate": "2015-05-15T02:27:21.000Z",
+      "id": "acfb31e7251ec892aa0c6cf3148d3efb9128596f"
+    }
+  }
+]

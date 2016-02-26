@@ -6,17 +6,29 @@ import java.io.File;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
+import org.wildfly.swarm.config.undertow.BufferCache;
+import org.wildfly.swarm.config.undertow.HandlerConfiguration;
+import org.wildfly.swarm.config.undertow.Server;
+import org.wildfly.swarm.config.undertow.ServletContainer;
+import org.wildfly.swarm.config.undertow.server.HTTPListener;
+import org.wildfly.swarm.config.undertow.server.Host;
+import org.wildfly.swarm.config.undertow.server.host.Location;
+import org.wildfly.swarm.config.undertow.servlet_container.JSPSetting;
+import org.wildfly.swarm.config.undertow.servlet_container.WebsocketsSetting;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.datasources.DatasourcesFraction;
 import org.wildfly.swarm.jpa.JPAFraction;
+import org.wildfly.swarm.undertow.UndertowFraction;
 import org.wildfly.swarm.undertow.WARArchive;
 import com.github.huangp.media.api.GalleryApplication;
 import com.github.huangp.media.api.MediaResource;
 import com.github.huangp.media.model.EXIF;
 import com.github.huangp.media.model.Media;
+import com.github.huangp.media.model.MediaFileType;
 import com.github.huangp.media.model.MetaInfo;
 import com.github.huangp.media.service.EJBMediaSearchServiceImpl;
 import com.github.huangp.media.service.MediaSearchService;
+import com.github.huangp.media.util.JSONObjectMapper;
 
 //import org.wildfly.swarm.jaxrs.JAXRSArchive;
 
@@ -34,6 +46,7 @@ public class Main {
                     d.xaDatasourceClass("org.h2.jdbcx.JdbcDataSource");
                     d.driverModuleName("com.h2database.h2");
                 })
+                // TODO use real database
                 .dataSource("MyDS", (ds) -> {
                     ds.driverName("h2");
                     ds.connectionUrl(
@@ -48,6 +61,31 @@ public class Main {
                 .inhibitDefaultDatasource()
                 .defaultDatasource("jboss/datasources/MyDS")
         );
+
+        // add additional file system path to server
+        Server server = new Server("default-server")
+                .httpListener(new HTTPListener("default").socketBinding("http"))
+                .host(new Host("default-host").alias("localhost")
+                        .location(new Location("media").handler("mediaHandler"))
+                );
+
+        // TODO use real path to media
+        String pictures = new File(System.getProperty("user.home"), "Pictures")
+                .getAbsolutePath();
+        String mediaRootPath = System.getProperty("media.path", pictures);
+        org.wildfly.swarm.config.undertow.configuration.File<?> fileConfig =
+                new org.wildfly.swarm.config.undertow.configuration.File<>(
+                        "mediaHandler").path(mediaRootPath)
+                        .directoryListing(true);
+        HandlerConfiguration<?> configuration =
+                new HandlerConfiguration<>().file(fileConfig);
+
+        container.fraction(new UndertowFraction().server(server)
+                .bufferCache(new BufferCache("default"))
+                .servletContainer(new ServletContainer("default")
+                        .websocketsSetting(new WebsocketsSetting())
+                        .jspSetting(new JSPSetting()))
+                .handlerConfiguration(configuration));
 
         container.start();
 
@@ -74,11 +112,13 @@ public class Main {
 
         // utilities
         deployment.addClass(ResourcesProducer.class);
+        deployment.addClass(JSONObjectMapper.class);
 
         // model
         deployment.addClass(Media.class);
         deployment.addClass(MetaInfo.class);
         deployment.addClass(EXIF.class);
+        deployment.addClass(MediaFileType.class);
 
         deployment.addAsWebInfResource(
                 new ClassLoaderAsset("META-INF/persistence.xml",
