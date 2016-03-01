@@ -12,8 +12,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,10 +37,14 @@ public class MediaResource {
     @Inject
     private MediaSearchService mediaSearchService;
 
+    @Context
+    private SecurityContext securityContext;
+
     @GET
     public Response getAll() {
         List<Media> result = mediaSearchService.getAllMedia();
-        log.info("=====: {}", result);
+//        log.info("=====: {}", result);
+        log.info("security context: {}", securityContext.getUserPrincipal());
         return Response.ok(result).build();
     }
 

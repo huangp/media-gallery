@@ -18,16 +18,23 @@ import org.wildfly.swarm.config.undertow.servlet_container.WebsocketsSetting;
 import org.wildfly.swarm.container.Container;
 import org.wildfly.swarm.datasources.DatasourcesFraction;
 import org.wildfly.swarm.jpa.JPAFraction;
+import org.wildfly.swarm.keycloak.Secured;
 import org.wildfly.swarm.undertow.UndertowFraction;
 import org.wildfly.swarm.undertow.WARArchive;
 import com.github.huangp.media.api.GalleryApplication;
 import com.github.huangp.media.api.MediaResource;
+import com.github.huangp.media.model.AuthenticatedUser;
 import com.github.huangp.media.model.EXIF;
 import com.github.huangp.media.model.Media;
 import com.github.huangp.media.model.MediaFileType;
 import com.github.huangp.media.model.MetaInfo;
+import com.github.huangp.media.security.LogoutURI;
 import com.github.huangp.media.service.EJBMediaSearchServiceImpl;
 import com.github.huangp.media.service.MediaSearchService;
+import com.github.huangp.media.servlet.MyServlet;
+import com.github.huangp.media.servlet.PathHolder;
+import com.github.huangp.media.servlet.RefreshTokenFilter;
+import com.github.huangp.media.servlet.ServletContextListener;
 import com.github.huangp.media.util.JSONObjectMapper;
 
 //import org.wildfly.swarm.jaxrs.JAXRSArchive;
@@ -99,7 +106,6 @@ public class Main {
 //                Main.class.getClassLoader()), "classes/META-INF/load.sql");
 //        deployment.addAllDependencies();
 
-
         WARArchive deployment = ShrinkWrap.create( WARArchive.class );
 
         // api
@@ -120,6 +126,16 @@ public class Main {
         deployment.addClass(EXIF.class);
         deployment.addClass(MediaFileType.class);
 
+        // security
+        deployment.addClass(PathHolder.class);
+        deployment.addClass(AuthenticatedUser.class);
+
+        // servlet
+        deployment.addClass(ServletContextListener.class);
+        deployment.addClass(RefreshTokenFilter.class);
+        deployment.addClass(MyServlet.class);
+
+
         deployment.addAsWebInfResource(
                 new ClassLoaderAsset("META-INF/persistence.xml",
                         Main.class.getClassLoader()),
@@ -128,12 +144,25 @@ public class Main {
         deployment.addAsWebResource(
                 new ClassLoaderAsset("index.html", Main.class.getClassLoader()), "index.html");
 
-//        deployment.addAsWebInfResource(
-//                new ClassLoaderAsset("WEB-INF/web.xml", Main.class.getClassLoader()), "web.xml");
+
         deployment.addAsWebInfResource(
                 new ClassLoaderAsset("WEB-INF/beans.xml", Main.class.getClassLoader()), "beans.xml");
 
+
+//        deployment.addAsWebInfResource(
+//                new ClassLoaderAsset("WEB-INF/web.xml", Main.class.getClassLoader()), "web.xml");
+
         deployment.addAllDependencies();
+
+        // keycloak
+        deployment.addAsWebInfResource(
+                new ClassLoaderAsset("WEB-INF/keycloak.json", Main.class.getClassLoader()), "keycloak.json");
+        // this is so that we don't have a class loading issue
+        deployment.addModule("org.keycloak.keycloak-adapter-spi", "main");
+        deployment.addModule("org.keycloak.keycloak-adapter-core", "main");
+        Secured secured = deployment.as(Secured.class);
+        secured.protect("/users").withMethod("GET").withRole("user");
+
 
         deployment.as(ZipExporter.class).exportTo(new File("/tmp/gallery.war"), true);
 

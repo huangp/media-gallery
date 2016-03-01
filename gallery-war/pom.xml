@@ -25,6 +25,7 @@
     <!-- the version being packaged inside wildfly is 2.5.4 -->
     <jackson.version>2.7.0</jackson.version>
     <resteasy.version>3.0.14.Final</resteasy.version>
+    <keycloak.version>1.8.0.Final</keycloak.version>
   </properties>
 
   <dependencyManagement>
@@ -73,6 +74,22 @@
         <artifactId>resteasy-jackson-provider</artifactId>
         <version>${resteasy.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>keycloak</artifactId>
+        <version>${version.wildfly-swarm}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -91,6 +108,11 @@
         <version>${version.wildfly-swarm}</version>
         <configuration>
           <mainClass>com.github.huangp.media.Main</mainClass>
+          <debug>5050</debug>
+          <debugPort>5050</debugPort>
+          <properties>
+            <swarm.http.port>8081</swarm.http.port>
+          </properties>
         </configuration>
         <executions>
           <execution>
@@ -147,6 +169,30 @@
       <groupId>org.wildfly.swarm</groupId>
       <artifactId>transactions</artifactId>
       <version>${version.wildfly-swarm}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>keycloak</artifactId>
+      <version>${version.wildfly-swarm}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-servlet-oauth-client</artifactId>
+      <version>${keycloak.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.keycloak</groupId>
+          <artifactId>keycloak-adapter-spi</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-adapter-core</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>

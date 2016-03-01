@@ -1,0 +1,10 @@
+{
+  "realm": "gallery",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAol98xHccKmIkQFRXbFjPBfLaBSw5PBr04zFhur8PnCPm57UTGcHB8vxbaz2+Ag9lJusSeroqdqHLbv/VUn3c5Y10o+LNcMS6rSZ30bDN9+hJl/3YJzs/zGLjK2bTjXrYANGV8JiZs3zKchSfGcLM+fK/YptDyMHlxSU/Uq+g7Du7VsGW4M7LGRj6lYi+UeVCE4EkOJ7ktY0bMyzwoOBFhvJjqVZYLC59D+voZgcNIMYVbMCMF4fhhftJnPTcSSlygN4rca0XVvDSfAP3gg3hYZD2OzeacnyTgCNQtcXjsuhvNwkw43g54/xoqV0ixZghbosf3qkHIBDXoz0sSKMeiwIDAQAB",
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "external",
+  "resource": "gallery-war",
+  "credentials": {
+    "secret": "83998088-c25d-4b03-baef-09681192e487"
+  }
+}

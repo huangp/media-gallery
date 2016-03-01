@@ -1,5 +1,8 @@
 package com.github.huangp.media;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -9,11 +12,15 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
+import org.keycloak.servlet.ServletOAuthClient;
+import org.keycloak.servlet.ServletOAuthClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -70,6 +77,12 @@ public class ResourcesProducer {
     protected void onDisposeElasticSearchClient(@Disposes Client client) {
         log.info("<<<<<<<<<<<<<<< closing elastic search client");
         client.close();
+    }
+
+    @Produces
+    @ApplicationScoped
+    protected ServletOAuthClient servletOAuthClient() {
+        return new ServletOAuthClient();
     }
 
 }
