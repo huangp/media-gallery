@@ -28,14 +28,12 @@ import com.github.huangp.media.model.EXIF;
 import com.github.huangp.media.model.Media;
 import com.github.huangp.media.model.MediaFileType;
 import com.github.huangp.media.model.MetaInfo;
-import com.github.huangp.media.security.LogoutURI;
 import com.github.huangp.media.service.EJBMediaSearchServiceImpl;
 import com.github.huangp.media.service.MediaSearchService;
-import com.github.huangp.media.servlet.MyServlet;
-import com.github.huangp.media.servlet.PathHolder;
-import com.github.huangp.media.servlet.RefreshTokenFilter;
+import com.github.huangp.media.servlet.AppServlet;
 import com.github.huangp.media.servlet.ServletContextListener;
 import com.github.huangp.media.util.JSONObjectMapper;
+import com.github.huangp.media.util.PathUtil;
 
 //import org.wildfly.swarm.jaxrs.JAXRSArchive;
 
@@ -127,13 +125,12 @@ public class Main {
         deployment.addClass(MediaFileType.class);
 
         // security
-        deployment.addClass(PathHolder.class);
+        deployment.addClass(PathUtil.class);
         deployment.addClass(AuthenticatedUser.class);
 
         // servlet
         deployment.addClass(ServletContextListener.class);
-        deployment.addClass(RefreshTokenFilter.class);
-        deployment.addClass(MyServlet.class);
+        deployment.addClass(AppServlet.class);
 
 
         deployment.addAsWebInfResource(

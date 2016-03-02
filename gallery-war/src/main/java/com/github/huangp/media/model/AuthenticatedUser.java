@@ -1,6 +1,7 @@
 package com.github.huangp.media.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.enterprise.context.SessionScoped;
 
 import com.google.common.base.MoreObjects;
@@ -13,15 +14,7 @@ import com.google.common.base.MoreObjects;
 public class AuthenticatedUser implements Serializable {
     private String username;
     private String name;
-    private String accessToken;
-
-    public AuthenticatedUser() {
-    }
-
-    public AuthenticatedUser(String username, String name) {
-        this.username = username;
-        this.name = name;
-    }
+    private Set<String> roles;
 
     public String getUsername() {
         return username;
@@ -39,12 +32,12 @@ public class AuthenticatedUser implements Serializable {
         this.name = name;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public Set<String> getRoles() {
+        return roles;
     }
 
     @Override
@@ -52,7 +45,7 @@ public class AuthenticatedUser implements Serializable {
         return MoreObjects.toStringHelper(this)
                 .add("username", username)
                 .add("name", name)
-                .add("accessToken", accessToken)
+                .add("roles", roles)
                 .toString();
     }
 }
