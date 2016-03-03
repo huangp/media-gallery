@@ -5,3 +5,4 @@ data/
 .gradle/
 *.iml
 *.jar
+node_modules/
