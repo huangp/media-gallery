@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 import { debounce } from 'lodash'
+import ReactList from 'react-list'
 
 
-import {searchTerm} from '../actions/searchActions'
+import {searchTerm, loadAllResources} from '../actions/searchActions'
 
-class Videos extends Component {
+class All extends Component {
+
   constructor () {
     super()
     // Need to add the debounce to onScroll here
@@ -14,22 +16,50 @@ class Videos extends Component {
     //this.onScroll = debounce(this.onScroll, 100)
   }
 
+  componentWillMount() {
+    this.props.loadResources()
+  }
+
+  renderItem(index, key) {
+    return <div key={key}>{this.props.resources[index].title}</div>;
+  }
+
   render () {
     return (
-      <div>This is for all things</div>
+        <div>
+          <h2>All media resources</h2>
+          <ReactList
+              itemRenderer={::this.renderItem}
+              length={this.props.resources.length}
+              type='uniform'
+          />
+        </div>
     )
   }
 }
 
+All.propTypes = {
+    loadResources: PropTypes.func.isRequired,
+    resources: PropTypes.arrayOf(PropTypes.shape(
+        {
+            title: PropTypes.string.isRequired,
+            url: PropTypes.string.isRequired
+        }
+    )).isRequired
+}
+
 const mapStateToProps = (state) => {
-  return state
+  return {
+    resources: state.search.resources
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    onSearchTerm: (term) => dispatch(searchTerm(term))
+    onSearchTerm: (term) => dispatch(searchTerm(term)),
+    loadResources: () => dispatch(loadAllResources())
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Videos)
+export default connect(mapStateToProps, mapDispatchToProps)(All)
