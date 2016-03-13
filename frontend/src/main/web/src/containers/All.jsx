@@ -21,7 +21,12 @@ class All extends Component {
   }
 
   renderItem(index, key) {
-    return <div key={key}>{this.props.resources[index].title}</div>;
+    return (
+        <div key={key}>
+            <p class="bg-success">
+                {this.props.resources[index].title}
+            </p>
+        </div>)
   }
 
   render () {

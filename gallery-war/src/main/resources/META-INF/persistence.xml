@@ -3,7 +3,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
   version="2.1">
-  <persistence-unit name="loginDatabase" transaction-type="JTA">
+  <persistence-unit name="primary" transaction-type="JTA">
+    <jta-data-source>java:jboss/datasources/MyDS</jta-data-source>
+    <class>com.github.huangp.media.entity.MediaFile</class>
+    <class>com.github.huangp.media.entity.User</class>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="create-drop" />
       <property name="hibernate.show_sql" value="true" />

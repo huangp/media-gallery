@@ -45,21 +45,53 @@ public class Main {
     public static void main(String... args) throws Exception {
         Container container = new Container();
 
-        container.fraction(new DatasourcesFraction()
-                .jdbcDriver("h2", (d) -> {
-                    d.driverClassName("org.h2.Driver");
-                    d.xaDatasourceClass("org.h2.jdbcx.JdbcDataSource");
-                    d.driverModuleName("com.h2database.h2");
-                })
-                // TODO use real database
-                .dataSource("MyDS", (ds) -> {
-                    ds.driverName("h2");
-                    ds.connectionUrl(
-                            "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
-                    ds.userName("sa");
-                    ds.password("sa");
-                })
-        );
+//        container.fraction(new DatasourcesFraction()
+//                .jdbcDriver("h2", (d) -> {
+//                    d.driverClassName("org.h2.Driver");
+//                    d.xaDatasourceClass("org.h2.jdbcx.JdbcDataSource");
+//                    d.driverModuleName("com.h2database.h2");
+//                })
+//                // TODO use real database
+//                .dataSource("MyDS", (ds) -> {
+//                    ds.driverName("h2");
+//                    ds.connectionUrl(
+//                            "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
+//                    ds.userName("sa");
+//                    ds.password("sa");
+//                })
+//        );
+
+        boolean production = Boolean.parseBoolean(System.getProperty("swarm.production"));
+
+        if (production) {
+            container.fraction(new DatasourcesFraction()
+                    .jdbcDriver("org.postgresql", (d) -> {
+                        d.driverClassName("org.postgresql.Driver");
+                        d.xaDatasourceClass("org.postgresql.xa.PGXADataSource");
+                        d.driverModuleName("org.postgresql");
+                    })
+                    .dataSource("MyDS", (ds) -> {
+                        ds.driverName("org.postgresql");
+                        ds.connectionUrl("jdbc:postgresql://localhost:5432/mediadb");
+                        ds.userName("mediauser");
+                        ds.password("n3v3rm0r3");
+                    })
+            );
+        } else {
+            container.fraction(new DatasourcesFraction()
+                    .jdbcDriver("h2", (d) -> {
+                        d.driverClassName("org.h2.Driver");
+                        d.xaDatasourceClass("org.h2.jdbcx.JdbcDataSource");
+                        d.driverModuleName("com.h2database.h2");
+                    })
+                    .dataSource("MyDS", (ds) -> {
+                        ds.driverName("h2");
+                        ds.connectionUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
+                        ds.userName("sa");
+                        ds.password("sa");
+                    })
+            );
+        }
 
         // Prevent JPA Fraction from installing it's default datasource fraction
         container.fraction(new JPAFraction()
@@ -106,7 +138,9 @@ public class Main {
 
         WARArchive deployment = ShrinkWrap.create( WARArchive.class );
 
-        // api
+        deployment.addPackages(true, Main.class.getPackage());
+
+        /*// api
         deployment.addClass(GalleryApplication.class);
         deployment.addClass(MediaResource.class);
 
@@ -130,7 +164,7 @@ public class Main {
 
         // servlet
         deployment.addClass(ServletContextListener.class);
-        deployment.addClass(AppServlet.class);
+        deployment.addClass(AppServlet.class);*/
 
 
         deployment.addAsWebInfResource(
@@ -141,9 +175,9 @@ public class Main {
         deployment.addAsWebResource(
                 new ClassLoaderAsset("index.html", Main.class.getClassLoader()), "index.html");
 
-
-        deployment.addAsWebInfResource(
-                new ClassLoaderAsset("WEB-INF/beans.xml", Main.class.getClassLoader()), "beans.xml");
+        // things under webapp are automatically included as we use WarArchive
+//        deployment.addAsWebInfResource(
+//                new ClassLoaderAsset("WEB-INF/beans.xml", Main.class.getClassLoader()), "beans.xml");
 
 
 //        deployment.addAsWebInfResource(

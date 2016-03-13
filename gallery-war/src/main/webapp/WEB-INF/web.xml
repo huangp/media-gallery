@@ -24,7 +24,7 @@
 
   <context-param>
     <param-name>liquibase.datasource</param-name>
-    <param-value>java:comp/env/jdbc/DataSource</param-value>
+    <param-value>java:jboss/datasources/MyDS</param-value>
   </context-param>
 
   <context-param>
@@ -33,9 +33,10 @@
   </context-param>
 
   <!-- listeners -->
-  <!--<listener>
-     <listener-class>liquibase.integration.servlet.LiquibaseServletListener</listener-class>
+  <listener>
+    <listener-class>liquibase.integration.servlet.LiquibaseServletListener</listener-class>
   </listener>
+  <!--
 
   <listener>
      <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>

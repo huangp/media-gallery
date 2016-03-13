@@ -17,6 +17,9 @@ import Configs from './constants/Configs'
 //import './styles/atomic.css'
 //import './styles/extras.css'
 
+import style from "!style!css!less!./style/style.less"
+//style.use();
+
 WebFont.load({
   google: {
     families: [

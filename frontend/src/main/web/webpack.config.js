@@ -12,14 +12,22 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'atomic-loader?configPath=' + __dirname +
-          '/atomicCssConfig.js' +
-          '!babel?presets[]=react,presets[]=stage-0,presets[]=es2015',
+        loader:
+          'babel?presets[]=react,presets[]=stage-0,presets[]=es2015',
         include: path.join(__dirname, 'src')
       },
       {
-        test: /\.css$/,
-        loader: 'style!css!autoprefixer?browsers=last 2 versions'
+        test: /\.less$/,
+        include: path.join(__dirname, 'src', 'style'),
+        loader: 'style!css?sourceMap!autoprefixer?browsers=last 2 versions!less?sourceMap=true'
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&minetype=application/font-woff"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
       }
     ]
   },
@@ -28,7 +36,7 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json', '.css']
+    extensions: ['', '.js', '.jsx', '.json', '.css', '.less']
   },
   node: {
     __dirname: true
