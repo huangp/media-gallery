@@ -5,9 +5,9 @@ import { debounce } from 'lodash'
 import ReactList from 'react-list'
 
 
-import {searchTerm, loadAllResources} from '../actions/searchActions'
+import {searchTerm, loadAllResources} from '../actions/GeneralSearchActions'
 
-class All extends Component {
+class Photos extends Component {
 
   constructor () {
     super()
@@ -32,7 +32,7 @@ class All extends Component {
   render () {
     return (
         <div>
-          <h2>All media resources</h2>
+          <h2>All photo resources</h2>
           <ReactList
               itemRenderer={::this.renderItem}
               length={this.props.resources.length}
@@ -43,7 +43,7 @@ class All extends Component {
   }
 }
 
-All.propTypes = {
+Photos.propTypes = {
     loadResources: PropTypes.func.isRequired,
     resources: PropTypes.arrayOf(PropTypes.shape(
         {
@@ -67,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(All)
+export default connect(mapStateToProps, mapDispatchToProps)(Photos)

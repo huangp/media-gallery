@@ -1,0 +1,95 @@
+{
+  "took": 4,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0
+  },
+  "hits": {
+    "total": 5,
+    "max_score": 1,
+    "hits": [
+      {
+        "_index": "media",
+        "_type": "video",
+        "_id": "a3b95cbc8a0f1795f14313b7a9cd86bfc7f847e0",
+        "_score": 1,
+        "_source": {
+          "file": "/home/pahuang/work/media-gallery/frontend/src/main/web/node_modules/test_media/2016-03/video/1458024632310_2016-03-15_16-50-32.MOV",
+          "fileOrigin": "/tmp/test_media/pentaxQ/IMGP0545.MOV",
+          "fileType": "video",
+          "sha1sum": "a3b95cbc8a0f1795f14313b7a9cd86bfc7f847e0",
+          "size": "48523700",
+          "createdDate": "2016-03-15T06:50:32.310Z",
+          "mime": null,
+          "title": "1458024632310_2016-03-15_16-50-32.MOV"
+        }
+      },
+      {
+        "_index": "media",
+        "_type": "video",
+        "_id": "90c271f5b973eb0a3fcd84f575e67135ce2d7f95",
+        "_score": 1,
+        "_source": {
+          "file": "/home/pahuang/work/media-gallery/frontend/src/main/web/node_modules/test_media/2013-08/video/1376300146000_2013-08-12_19-35-46.MOV",
+          "fileOrigin": "/tmp/test_media/pentaxk01/videos/IMGP1188.MOV",
+          "fileType": "video",
+          "sha1sum": "90c271f5b973eb0a3fcd84f575e67135ce2d7f95",
+          "size": "5718140",
+          "createdDate": "2013-08-12T09:35:46.000Z",
+          "mime": null,
+          "title": "1376300146000_2013-08-12_19-35-46.MOV"
+        }
+      },
+      {
+        "_index": "media",
+        "_type": "video",
+        "_id": "f4b696a402efd18188b6ecf63bf8d331d6320526",
+        "_score": 1,
+        "_source": {
+          "file": "/home/pahuang/work/media-gallery/frontend/src/main/web/node_modules/test_media/2014-01/video/1390622079000_2014-01-25_13-54-39.mp4",
+          "fileOrigin": "/tmp/test_media/zheng_phone/1390622083660.mp4",
+          "fileType": "video",
+          "sha1sum": "f4b696a402efd18188b6ecf63bf8d331d6320526",
+          "size": "1080412",
+          "createdDate": "2014-01-25T03:54:39.000Z",
+          "mime": "video/mp4",
+          "title": "1390622079000_2014-01-25_13-54-39.mp4"
+        }
+      },
+      {
+        "_index": "media",
+        "_type": "video",
+        "_id": "62d5b0abfe61bcbffdb298ada9af09eefc1bc692",
+        "_score": 1,
+        "_source": {
+          "file": "/home/pahuang/work/media-gallery/frontend/src/main/web/node_modules/test_media/2013-06/video/1371736800000_2013-06-21_00-00-00.mkv",
+          "fileOrigin": "/tmp/test_media/processed/20130621.洗澡.mkv",
+          "fileType": "video",
+          "sha1sum": "62d5b0abfe61bcbffdb298ada9af09eefc1bc692",
+          "size": "22119974",
+          "createdDate": "2013-06-20T14:00:00.000Z",
+          "mime": "video/x-matroska",
+          "title": "1371736800000_2013-06-21_00-00-00.mkv"
+        }
+      },
+      {
+        "_index": "media",
+        "_type": "video",
+        "_id": "f63de5dfe9b43d9bf3d38d533388b1afd141c53f",
+        "_score": 1,
+        "_source": {
+          "file": "/home/pahuang/work/media-gallery/frontend/src/main/web/node_modules/test_media/2015-05/video/1431656841000_2015-05-15_12-27-21.mp4",
+          "fileOrigin": "/tmp/test_media/zheng_phone/VID_20150515_122721.mp4",
+          "fileType": "video",
+          "sha1sum": "f63de5dfe9b43d9bf3d38d533388b1afd141c53f",
+          "size": "20710920",
+          "createdDate": "2015-05-15T02:27:21.000Z",
+          "mime": "video/mp4",
+          "title": "1431656841000_2015-05-15_12-27-21.mp4"
+        }
+      }
+    ]
+  }
+}

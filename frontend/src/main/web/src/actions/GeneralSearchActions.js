@@ -16,14 +16,16 @@ export const searchTerm = (term) => {
   }
 }
 
+export const RESOURCE_REQUEST = 'RESOURCE_REQUEST'
 export const RESOURCE_SUCCESS = 'RESOURCE_SUCCESS'
+export const RESOURCE_FAILURE = 'RESOURCE_FAILURE'
 
 export const loadAllResources = () => {
   return {
     [CALL_API]: {
       endpoint: 'http://localhost:8000//fakeData/resources.json',
       method: 'GET',
-      types: ['RESOURCE_REQUEST', RESOURCE_SUCCESS, 'RESOURCE_FAILURE']
+      types: [RESOURCE_REQUEST, RESOURCE_SUCCESS, RESOURCE_FAILURE]
     }
   }
 }

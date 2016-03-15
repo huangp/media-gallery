@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { Router, Route, Redirect } from 'react-router'
 import App from '../containers/App'
 import View from '../components/View'
-import All from '../containers/All'
+import Photos from '../containers/Photos'
 import Videos from '../containers/Videos'
 
 export default class Root extends Component {
@@ -18,8 +18,8 @@ export default class Root extends Component {
           <Router history={history}>
             <Route component={App} >
               <Route path="videos" component={Videos} />
-              <Redirect from="/" to="all" />
-              <Route path="all" component={All} />
+              <Redirect from="/" to="videos" />
+              <Route path="photos" component={Photos} />
             </Route>
           </Router>
         </View>

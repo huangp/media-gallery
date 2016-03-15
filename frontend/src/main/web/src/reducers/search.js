@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import {UPDATE_SEARCH_TERM, RESOURCE_SUCCESS} from '../actions/searchActions'
+import {UPDATE_SEARCH_TERM, RESOURCE_SUCCESS} from '../actions/GeneralSearchActions'
 
 const defaultState = {
   term: '',
