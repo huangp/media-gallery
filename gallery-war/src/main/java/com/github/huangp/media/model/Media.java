@@ -12,7 +12,11 @@ import com.google.common.base.MoreObjects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Media {
     private String file;
+    private String fileOrigin;
+    private String fileType;
     private String description;
+    private String sha1sum;
+    private Date createdDate;
     private MetaInfo meta;
 
     public String getFile() {
