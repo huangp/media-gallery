@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"'>
 
-    <link href="http://vjs.zencdn.net/5.0/video-js.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/bundle.css">
+
     <title>Zanata</title>
   </head>
 
-  <body class="M(0) C(dark)">
-    <div id="root" class="container-fluid"
-      base-url="http://localhost:8000/fakeData"
-      user='{"username": "test-user", "email":"zanata@zanata.org", "name": "admin-name", "imageUrl":"//www.gravatar.com/avatar/dda6e90e3f2a615fb8b31205e8b4894b?d=mm&r=g&s=115", "languageTeams": ["English, French, German, Yodish (Yoda English)"]}'
-      data='{"permission":{"updateGlossary":true, "insertGlossary":true, "deleteGlossary":true}, "dev": "true", "profileUser" : {"username": "test-user", "email":"zanata@zanata.org", "name":"admin-name","loggedIn":"true","imageUrl":"//www.gravatar.com/avatar/dda6e90e3f2a615fb8b31205e8b4894b?d=mm&r=g&s=115","languageTeams":["English", "French", "German", "Yodish (Yoda English)"]}}'
+  <body >
+    <div id="main" class="container-fluid"
+      data-app-basename="/fakeData"
     >
     </div>
     <script src="bundle.js" ></script>

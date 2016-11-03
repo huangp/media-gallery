@@ -24,21 +24,21 @@ class Videos extends Component {
     this.props.loadResources()
   }
 
-  renderItem(index, key) {
-    const resource = this.props.resources[index]
+  renderItem(resource, index) {
     const src = resource.url
     const type = resource.mime
-    const width = 6 * 95 + 'px'
+    console.log(`src=${src} type=${type}`)
     return (
-        <div key={key} className="row">
+        <li key={index} className="row">
           <div className="col-md-6 col-md-offset-3">
             <h3>{resource.title}</h3>
-            <Video src={src} type={type} width={width}/>
+            <Video src={src} type={type} />
           </div>
-        </div>)
+        </li>)
   }
 
   render () {
+    const videos = this.props.resources.map(::this.renderItem)
     return (
         <div>
           <h2>All video resources</h2>
@@ -46,11 +46,9 @@ class Videos extends Component {
             To view this video please enable JavaScript, and consider upgrading to a web browser
             that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
           </p>
-          <ReactList
-              itemRenderer={::this.renderItem}
-              length={this.props.resources.length}
-              type='uniform'
-          />
+          <ul>
+            {videos}
+          </ul>
         </div>
     )
   }

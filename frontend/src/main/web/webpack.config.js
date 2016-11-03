@@ -1,5 +1,7 @@
 var webpack = require('webpack')
 var path = require('path')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 
 module.exports = {
   entry: './src/index',
@@ -12,14 +14,17 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader:
-          'babel?presets[]=react,presets[]=stage-0,presets[]=es2015',
+        loader: 'babel',
         include: path.join(__dirname, 'src')
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css?safe&sourceMap', 'autoprefixer?browsers=last 2 versions')
       },
       {
         test: /\.less$/,
         include: path.join(__dirname, 'src', 'style'),
-        loader: 'style!css?sourceMap!autoprefixer?browsers=last 2 versions!less?sourceMap=true'
+        loaders: ['less?sourceMap=true']
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -32,7 +37,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin()
   ],
   resolve: {

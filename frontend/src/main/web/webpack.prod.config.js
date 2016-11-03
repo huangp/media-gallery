@@ -30,6 +30,7 @@ module.exports = _.merge({}, defaultConfig, {
     ]
   },
   plugins: defaultConfig.plugins.concat([
+    new webpack.optimize.OccurenceOrderPlugin(),
     new ExtractTextPlugin('bundle.css'),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
